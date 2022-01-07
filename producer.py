@@ -4,7 +4,7 @@ from time import sleep
 from kafka import KafkaProducer
 
 # channel
-topic = 'quickstart'
+topic = 'app'
 
 # producer
 producer = KafkaProducer(bootstrap_servers=[
