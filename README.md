@@ -44,5 +44,5 @@
 ## Author
 - [Bhimraj Yadav (@bhimrazy)](https://github.com/bhimrazy)
 
-##🧾Resources
+## 🧾Resources
 - [Apache Kafka® Quick Start](https://developer.confluent.io/quickstart/kafka-docker/)
