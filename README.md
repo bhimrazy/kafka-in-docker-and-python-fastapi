@@ -1,5 +1,4 @@
 # Kafka With Python
-[Apache Kafka® Quick Start](https://developer.confluent.io/quickstart/kafka-docker/)
 ## Setup
 ```sh
     # Compose up
@@ -44,3 +43,6 @@
 ```
 ## Author
 - [Bhimraj Yadav (@bhimrazy)](https://github.com/bhimrazy)
+
+##🧾Resources
+- [Apache Kafka® Quick Start](https://developer.confluent.io/quickstart/kafka-docker/)
