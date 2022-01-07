@@ -1,5 +1,5 @@
 # Kafka With Python
-
+![Apache Kafka® Quick Start](https://developer.confluent.io/quickstart/kafka-docker/)
 ## Setup
 ```sh
     # Compose up
@@ -42,3 +42,5 @@
     # Stop containers
     $ docker-compose down
 ```
+## Author
+    - [Bhimraj Yadav (@bhimrazy)](https://github.com/bhimrazy)
