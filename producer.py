@@ -21,7 +21,7 @@ def on_send_error(excp):
 
 
 def publish(method: str, body: dict):
-    producer.send(topic,{method:body}).add_callback(
+    producer.send(topic, key=method.encode('UTF-8') ,value=body).add_callback(
         on_send_success).add_errback(on_send_error)
     print(f'Topic :{topic}  Key :{method}   published.')
 
