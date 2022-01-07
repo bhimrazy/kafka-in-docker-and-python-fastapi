@@ -10,6 +10,9 @@
     # Create a topic with name quickstart
     $ kafka-topics --bootstrap-server broker:9092  --create  --topic quickstart
 
+    # list topics
+    $ kafka-topics --list --bootstrap-server broker:9092
+
 ```
 ## Write messages to the topic
 ```sh
