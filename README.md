@@ -43,4 +43,4 @@
     $ docker-compose down
 ```
 ## Author
-    - [Bhimraj Yadav (@bhimrazy)](https://github.com/bhimrazy)
+- [Bhimraj Yadav (@bhimrazy)](https://github.com/bhimrazy)
