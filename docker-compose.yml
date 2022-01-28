@@ -1,15 +1,19 @@
----
-version: '3'
+version: "3"
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:6.2.0
     container_name: zookeeper
+    networks:
+      - broker-kafka
+    ports:
+      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: confluentinc/cp-kafka:5.3.0
+    image: confluentinc/cp-kafka:6.2.0
     container_name: kafka
     networks:
       - broker-kafka
@@ -32,19 +36,49 @@ services:
       # KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       # KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
-  app:
+  kafdrop:
+    image: obsidiandynamics/kafdrop:3.27.0
+    networks:
+      - broker-kafka
+    depends_on:
+      - kafka
+      - zookeeper
+    ports:
+      - 19000:9000
+    environment:
+      KAFKA_BROKERCONNECT: kafka:29092
+
+  web_app:
     build: .
     command: uvicorn main:app --host 0.0.0.0
     container_name: web_app
-    volumes:
-      - .:/app
-    ports:
-      - 8000:8000
     environment:
       - KAFKA_TOPIC_NAME=topic_test
       - KAFKA_SERVER=kafka
       - KAFKA_PORT=29092
+    ports:
+      - 8000:8000
     restart: "always"
+    volumes:
+      - .:/app
+    depends_on:
+      - zookeeper
+      - kafka
+    networks:
+      - broker-kafka
+
+  consumer:
+    build: .
+    command: python consumer.py
+    container_name: consumer
+    environment:
+      - KAFKA_TOPIC_NAME=topic_test
+      - KAFKA_SERVER=kafka
+      - KAFKA_PORT=29092
+
+    restart: "always"
+    volumes:
+      - .:/app
     depends_on:
       - zookeeper
       - kafka
