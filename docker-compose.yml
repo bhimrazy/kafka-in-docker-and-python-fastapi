@@ -50,7 +50,7 @@ services:
 
   web_app:
     build: .
-    command: uvicorn main:app --host 0.0.0.0
+    command: uvicorn main:app --reload --host 0.0.0.0 --port=${PORT:-8000}
     container_name: web_app
     environment:
       - KAFKA_TOPIC_NAME=topic_test
