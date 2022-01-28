@@ -1,8 +1,9 @@
-anyio==3.4.0
-asgiref==3.4.1
+anyio==3.5.0
+asgiref==3.5.0
 click==8.0.3
-fastapi==0.70.1
-h11==0.12.0
+colorama==0.4.4
+fastapi==0.73.0
+h11==0.13.0
 httptools==0.3.0
 idna==3.3
 kafka-python==2.0.2
@@ -10,9 +11,8 @@ pydantic==1.9.0
 python-dotenv==0.19.2
 PyYAML==6.0
 sniffio==1.2.0
-starlette==0.16.0
-typing-extensions==4.0.1
-uvicorn==0.16.0
-uvloop==0.16.0
+starlette==0.17.1
+typing_extensions==4.0.1
+uvicorn==0.17.0.post1
 watchgod==0.7
 websockets==10.1
