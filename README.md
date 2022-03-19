@@ -2,6 +2,8 @@
 
 ## Setup
 
+[kafka.ipynb](https://github.com/bhimrazy/kafka-in-docker-and-python-fastapi/blob/main/kafka.ipynb) can be used to get hands on with kafka-python.
+
 ```sh
     # Compose up
     $ docker-compose up -d
