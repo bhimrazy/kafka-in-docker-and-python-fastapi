@@ -23,6 +23,7 @@ async def api_product(name: str, price: float, background_tasks: BackgroundTasks
     execution_time = f'{round(time_diff.total_seconds() * 1000)} ms'
     return {'message': 'Success', 'data': data, 'execution_time': execution_time}
 
+
 @app.get("/api/v1/product")
 async def api_product():
     start_time = datetime.datetime.now()

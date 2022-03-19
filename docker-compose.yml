@@ -21,7 +21,6 @@ services:
       - zookeeper
     ports:
       - "9092:9092"
-      - "9101:9101"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ADVERTISED_HOST_NAME: kafka:9092
@@ -35,55 +34,6 @@ services:
       # KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
       # KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       # KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-
-  kafdrop:
-    image: obsidiandynamics/kafdrop:3.27.0
-    networks:
-      - broker-kafka
-    depends_on:
-      - kafka
-      - zookeeper
-    ports:
-      - 19000:9000
-    environment:
-      KAFKA_BROKERCONNECT: kafka:29092
-
-  web_app:
-    build: .
-    command: uvicorn main:app --reload --host 0.0.0.0 --port=${PORT:-8000}
-    container_name: web_app
-    environment:
-      - KAFKA_TOPIC_NAME=topic_test
-      - KAFKA_SERVER=kafka
-      - KAFKA_PORT=29092
-    ports:
-      - 8000:8000
-    restart: "always"
-    volumes:
-      - .:/app
-    depends_on:
-      - zookeeper
-      - kafka
-    networks:
-      - broker-kafka
-
-  consumer:
-    build: .
-    command: python consumer.py
-    container_name: consumer
-    environment:
-      - KAFKA_TOPIC_NAME=topic_test
-      - KAFKA_SERVER=kafka
-      - KAFKA_PORT=29092
-
-    restart: "always"
-    volumes:
-      - .:/app
-    depends_on:
-      - zookeeper
-      - kafka
-    networks:
-      - broker-kafka
 
 networks:
   broker-kafka:

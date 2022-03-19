@@ -4,18 +4,12 @@ from enum import Enum
 from time import sleep
 from kafka import KafkaConsumer
 
-class EnvironmentVariables(str, Enum):
-    KAFKA_TOPIC_NAME = 'KAFKA_TOPIC_NAME'
-    KAFKA_SERVER = 'KAFKA_SERVER'
-    KAFKA_PORT = 'KAFKA_PORT'
-
-    def get_env(self, variable=None):
-        return os.environ.get(self, variable)
-
 # channel
 topic = 'app'
+
 # consumer
-consumer = KafkaConsumer(topic, bootstrap_servers=f'{EnvironmentVariables.KAFKA_SERVER.get_env()}:{EnvironmentVariables.KAFKA_PORT.get_env()}', auto_offset_reset='latest', value_deserializer=lambda x: json.loads(x.decode('utf-8')))
+consumer = KafkaConsumer(topic, bootstrap_servers=[
+                         'localhost:9092'], auto_offset_reset='latest', value_deserializer=lambda x: json.loads(x.decode('utf-8')))
 
 
 def write_to_file(file, value):
@@ -27,6 +21,7 @@ def write_to_file(file, value):
 
 
 for message in consumer:
+    print("Consuming.....")
     print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
                                          message.offset, message.key, message.value))
     if message.key == b'create_product':
